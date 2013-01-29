@@ -198,10 +198,10 @@ KanbanCardRenderer = function(column, item, options) {
         
         var releaseName = dojo.query('.releaseName', card)[0];
         if(item.Release){
-           releaseName.appendChild(document.createTextNode(item.Release.Name));
+           releaseName.innerHTML = item.Release.Name;
         }
         else{
-           releaseName.appendChild(document.createTextNode("No Release"));
+           releaseName.innerHTML = "No Release";
         }
 
         var tagList = dojo.query('.tagList', card)[0];
