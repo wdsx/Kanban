@@ -28,6 +28,7 @@
     margin-right: 10px;
 }
 
+
 .dropdownContainer .filterByTagsDropdown .dijitTextBox {
     vertical-align: middle;
 }
@@ -295,4 +296,27 @@
     color: #666666;
     margin-top: 5px;
     padding-top: 5px;
+}
+
+.releaseName {
+    color: #F781D8;
+    margin-top: 5px;
+}
+
+.tagList {
+    color: #04B45F;
+    margin-top: 5px;
+}
+
+.cardName {
+    border-bottom: 1px dotted #aaa;
+    margin-bottom: 2px;
+    padding-bottom: 4px;
+}
+
+.pairImg {
+    height: 24px;
+    width: 24px;
+    margin: 1px;
+    border: 1px solid #aaa;
 }

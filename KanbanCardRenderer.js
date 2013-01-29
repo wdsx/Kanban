@@ -181,6 +181,37 @@ KanbanCardRenderer = function(column, item, options) {
         var cardName = dojo.query('.cardName', card)[0];
         cardName.innerHTML = item.Name;
 
+
+        var pairList = dojo.query('.pairList', card)[0];
+        pairList.innerHTML = "";
+        if(item.Pair){
+            var pairs = item.Pair.split("+"); 
+
+            for (var i=0;i<pairs.length; i++) {
+                var pairImg = document.createElement("img");
+                pairImg.setAttribute("src", "http://dropzone.wdstechnology.com/pairs/" +  pairs[i] + ".png");
+                pairImg.setAttribute("title", pairs[i]);
+                dojo.addClass(pairImg, 'pairImg');
+                pairList.appendChild(pairImg);
+           }
+        }
+        
+        var releaseName = dojo.query('.releaseName', card)[0];
+        if(item.Release){
+           releaseName.appendChild(document.createTextNode(item.Release.Name));
+        }
+        else{
+           releaseName.appendChild(document.createTextNode("No Release"));
+        }
+
+        var tagList = dojo.query('.tagList', card)[0];
+        tagList.innerHTML = "";
+        if(item.Tags){
+            for (var i=0;i<item.Tags.length; i++) {
+                tagList.appendChild(document.createTextNode(item.Tags[i].Name));
+            }
+        }
+
         var tasksDiv = dojo.query('.tasks', card);
 
         if (tasksDiv.length > 0) {
@@ -294,6 +325,20 @@ KanbanCardRenderer = function(column, item, options) {
         var cardName = document.createElement("div");
         dojo.addClass(cardName, "cardName");
         cardContent.appendChild(cardName);
+
+        var pairList = document.createElement("div");
+        dojo.addClass(pairList, "pairList");
+        cardContent.appendChild(pairList);
+
+        var tagList = document.createElement("div");
+        dojo.addClass(tagList, "tagList");
+        cardContent.appendChild(tagList);
+
+        var releaseName = document.createElement("div");
+        dojo.addClass(releaseName, "releaseName");
+        cardContent.appendChild(releaseName);
+
+
 
         var statusDiv = document.createElement("div");
         dojo.addClass(statusDiv, 'status');
