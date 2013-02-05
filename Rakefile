@@ -840,7 +840,7 @@ module Rally
       end
 
       def sdk_path
-        "/apps/#{@sdk_version}/#{@sdk_file}"
+        "/apps/#{@sdk_version}/#{@sdk_file}?apiVersion=1.38"
       end
     end
   end
