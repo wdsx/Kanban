@@ -320,3 +320,10 @@
     margin: 1px;
     border: 1px solid #aaa;
 }
+.blockedReason {
+    color:red;
+    font-weight:bold;
+    border-bottom: 1px dotted #aaa;
+    margin-bottom: 2px;
+    padding-bottom: 4px;
+}

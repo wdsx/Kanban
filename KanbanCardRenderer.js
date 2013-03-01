@@ -196,6 +196,11 @@ KanbanCardRenderer = function(column, item, options) {
            }
         }
         
+	var blockedReason = dojo.query('.blockedReason', card)[0];
+        if(item.Blocked){
+	   blockedReason.innerHTML = item.BlockedReason;
+        }
+
         var releaseName = dojo.query('.releaseName', card)[0];
         if(item.Release){
            releaseName.innerHTML = item.Release.Name;
@@ -330,6 +335,10 @@ KanbanCardRenderer = function(column, item, options) {
         dojo.addClass(pairList, "pairList");
         cardContent.appendChild(pairList);
 
+	var blockedReason = document.createElement("div");
+	dojo.addClass(blockedReason,"blockedReason");
+	cardContent.appendChild(blockedReason);
+
         var tagList = document.createElement("div");
         dojo.addClass(tagList, "tagList");
         cardContent.appendChild(tagList);
@@ -392,9 +401,11 @@ KanbanCardRenderer = function(column, item, options) {
         }
         if (item.Blocked) {
             dojo.addClass(card, "blocked");
+	    dojo.query('.blockedReason',card)[0].innerHTML = item.BlockedReason;
         }
         else {
             dojo.removeClass(card, "blocked");
+            dojo.query('.blockedReason',card)[0].innerHTML = "";
         }
     };
 
