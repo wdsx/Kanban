@@ -213,7 +213,7 @@ KanbanCardRenderer = function(column, item, options) {
         tagList.innerHTML = "";
         if(item.Tags){
             for (var i=0;i<item.Tags.length; i++) {
-                tagList.appendChild(document.createTextNode(item.Tags[i].Name));
+                tagList.appendChild(document.createTextNode(item.Tags[i].Name + " "));
             }
         }
 
