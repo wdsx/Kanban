@@ -316,7 +316,7 @@
                     },
                     columnRenderer  : KanbanColumnRenderer,
                     columns         : columns,
-                    fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,LastUpdateDate,Tags,State,Pair,Release"
+                    fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,BlockedReason,LastUpdateDate,Tags,State,Pair,Size,Release"
                 };
     
     
@@ -364,7 +364,8 @@
             //Redisplay the board
             this._redisplayBoard();
         };
-    };    KanbanCardRenderer = function(column, item, options) {
+    };
+    KanbanCardRenderer = function(column, item, options) {
         rally.sdk.ui.cardboard.BasicCardRenderer.call(this, column, item, options);
         var that = this;
         var cardContent,card,cardMenu;
@@ -546,6 +547,10 @@
     
             var cardName = dojo.query('.cardName', card)[0];
             cardName.innerHTML = item.Name;
+            var sizeSpan = document.createElement("span");
+            dojo.addClass(sizeSpan, 'size-span');
+            sizeSpan.innerHTML = item.Size;
+            cardName.appendChild(sizeSpan);
     
     
             var pairList = dojo.query('.pairList', card)[0];
@@ -562,6 +567,11 @@
                }
             }
             
+    	var blockedReason = dojo.query('.blockedReason', card)[0];
+            if(item.Blocked){
+    	   blockedReason.innerHTML = item.BlockedReason;
+            }
+    
             var releaseName = dojo.query('.releaseName', card)[0];
             if(item.Release){
                releaseName.innerHTML = item.Release.Name;
@@ -574,7 +584,8 @@
             tagList.innerHTML = "";
             if(item.Tags){
                 for (var i=0;i<item.Tags.length; i++) {
-                    tagList.appendChild(document.createTextNode(item.Tags[i].Name));
+                    tagList.appendChild(document.createTextNode(item.Tags[i].Name ));
+                    tagList.appendChild(document.createElement("br"));
                 }
             }
     
@@ -696,6 +707,10 @@
             dojo.addClass(pairList, "pairList");
             cardContent.appendChild(pairList);
     
+    	var blockedReason = document.createElement("div");
+    	dojo.addClass(blockedReason,"blockedReason");
+    	cardContent.appendChild(blockedReason);
+    
             var tagList = document.createElement("div");
             dojo.addClass(tagList, "tagList");
             cardContent.appendChild(tagList);
@@ -758,9 +773,11 @@
             }
             if (item.Blocked) {
                 dojo.addClass(card, "blocked");
+    	    dojo.query('.blockedReason',card)[0].innerHTML = item.BlockedReason;
             }
             else {
                 dojo.removeClass(card, "blocked");
+                dojo.query('.blockedReason',card)[0].innerHTML = "";
             }
         };
     
@@ -2093,6 +2110,19 @@
         margin: 1px;
         border: 1px solid #aaa;
     }
+    .blockedReason {
+        color:red;
+        font-weight:bold;
+        border-bottom: 1px dotted #aaa;
+        margin-bottom: 2px;
+        padding-bottom: 4px;
+    }
+    
+    .size-span {
+        float:right;
+        font-weight: bold;
+    }
+
   </style>
     <script type="text/javascript">
         //this function will help us by getting our default project and workspace to help with external kanban development.

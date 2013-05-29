@@ -180,6 +180,10 @@ KanbanCardRenderer = function(column, item, options) {
 
         var cardName = dojo.query('.cardName', card)[0];
         cardName.innerHTML = item.Name;
+        var sizeSpan = document.createElement("span");
+        dojo.addClass(sizeSpan, 'size-span');
+        sizeSpan.innerHTML = item.Size;
+        cardName.appendChild(sizeSpan);
 
 
         var pairList = dojo.query('.pairList', card)[0];
@@ -213,7 +217,8 @@ KanbanCardRenderer = function(column, item, options) {
         tagList.innerHTML = "";
         if(item.Tags){
             for (var i=0;i<item.Tags.length; i++) {
-                tagList.appendChild(document.createTextNode(item.Tags[i].Name + " "));
+                tagList.appendChild(document.createTextNode(item.Tags[i].Name ));
+                tagList.appendChild(document.createElement("br"));
             }
         }
 

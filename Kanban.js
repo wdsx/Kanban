@@ -306,7 +306,7 @@ KanbanBoard = function(rallyDataSource, configShow) {
                 },
                 columnRenderer  : KanbanColumnRenderer,
                 columns         : columns,
-                fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,BlockedReason,LastUpdateDate,Tags,State,Pair,Release"
+                fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,BlockedReason,LastUpdateDate,Tags,State,Pair,Size,Release"
             };
 
 
