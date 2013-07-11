@@ -182,7 +182,14 @@ KanbanCardRenderer = function(column, item, options) {
         cardName.innerHTML = item.Name;
         var sizeSpan = document.createElement("span");
         dojo.addClass(sizeSpan, 'size-span');
-        sizeSpan.innerHTML = item.Size;
+        var sizeString = "";
+        if( item.Size ) {
+            sizeString += item.Size + " ";
+        }
+        if (item.PlanEstimate != null) {
+            sizeString += item.PlanEstimate;
+        } 
+        sizeSpan.innerHTML = sizeString;
         cardName.appendChild(sizeSpan);
 
 
@@ -211,6 +218,10 @@ KanbanCardRenderer = function(column, item, options) {
         }
         else{
            releaseName.innerHTML = "No Release";
+        }
+
+        if(item.Iteration) {
+            releaseName.innerHTML += " " + item.Iteration.Name;
         }
 
         var tagList = dojo.query('.tagList', card)[0];

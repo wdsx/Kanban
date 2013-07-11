@@ -316,7 +316,7 @@
                     },
                     columnRenderer  : KanbanColumnRenderer,
                     columns         : columns,
-                    fetch           : "Name,FormattedID,Owner,ObjectID,Rank,Ready,Blocked,BlockedReason,LastUpdateDate,Tags,State,Pair,Size,Release"
+                    fetch           : "Name,FormattedID,PlanEstimate,Owner,ObjectID,Rank,Ready,Blocked,BlockedReason,LastUpdateDate,Tags,State,Pair,Size,Release,Iteration"
                 };
     
     
@@ -549,7 +549,14 @@
             cardName.innerHTML = item.Name;
             var sizeSpan = document.createElement("span");
             dojo.addClass(sizeSpan, 'size-span');
-            sizeSpan.innerHTML = item.Size;
+            var sizeString = "";
+            if( item.Size ) {
+                sizeString += item.Size + " ";
+            }
+            if (item.PlanEstimate != null) {
+                sizeString += item.PlanEstimate;
+            } 
+            sizeSpan.innerHTML = sizeString;
             cardName.appendChild(sizeSpan);
     
     
@@ -578,6 +585,10 @@
             }
             else{
                releaseName.innerHTML = "No Release";
+            }
+    
+            if(item.Iteration) {
+                releaseName.innerHTML += " " + item.Iteration.Name;
             }
     
             var tagList = dojo.query('.tagList', card)[0];
